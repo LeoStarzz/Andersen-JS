@@ -16,6 +16,8 @@ function string(str) {
 function check(param) {
 	if (param === null || param === undefined) {
 		return true;
+	} else {
+		return false;
 	}
 }
 
