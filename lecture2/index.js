@@ -27,11 +27,11 @@ function addField(obj) {
 // Задача 5
 function allNumbers(number) {
   if (number >= 0) {
-    for (int i = 0; i <= number; i++) {
+    for (var i = 0; i <= number; i++) {
 			console.log(i);
 		}
 	} else {
-		for (int j = 0; j >= number; j--) {
+		for (var j = 0; j >= number; j--) {
 			console.log(j);
 		}
 	}
