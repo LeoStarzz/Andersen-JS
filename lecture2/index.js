@@ -14,7 +14,7 @@ function string(str) {
 
 // Задача 3
 function check(param) {
-	if (param === null || param === undefined) {
+	if (typeof param === null || typeof param === undefined) {
 		return true;
 	} else {
 		return false;
