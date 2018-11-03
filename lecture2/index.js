@@ -1,15 +1,11 @@
 // Задача 1
 function numbers(a, b) {
-	if (a > b) {
-		return true;
-	} else {
-		return false;
-	}
+	return a > b;
 }
 
 // Задача 2
 function string(str) {
-  return 'Вы ввели ' + str;
+  return 'Вы ввели * ' + str + ' *';
 }
 
 // Задача 3
@@ -28,13 +24,10 @@ function addField(obj) {
 
 // Задача 5
 function allNumbers(number) {
-  if (number >= 0) {
-    for (var i = 0; i <= number; i++) {
-			console.log(i);
-		}
-	} else {
-		for (var j = 0; j >= number; j--) {
-			console.log(j);
-		}
+	for (var i = 0; i <= number; i++) {
+		console.log(i);
+	}
+	for (var j = number; j >= 0; j--) {
+		console.log(j);
 	}
 }
