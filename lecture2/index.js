@@ -10,11 +10,7 @@ function string(str) {
 
 // Задача 3
 function check(param) {
-	if (param === null || param === undefined) {
-		return true;
-	} else {
-		return false;
-	}
+	return (param === null || param === undefined);
 }
 
 // Задача 4
