@@ -1,19 +1,11 @@
 var module = (function () {
 	return {
 		isUndefined: function (param) {
-			if (param === undefined) {
-				return true;
-			} else {
-				return false;
-			}
+			return param === undefined;
 		},
 
 		isNull: function (param) {
-			if (param === null) {
-				return true;
-			} else {
-				return false;
-			}
+		  return param === null;
 		},
 
 		isNaN: function (param) {
