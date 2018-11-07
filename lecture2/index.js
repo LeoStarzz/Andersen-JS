@@ -5,12 +5,12 @@ function numbers(a, b) {
 
 // Задача 2
 function string(str) {
-  return 'Вы ввели * ' + str + ' *';
+	return 'Вы ввели * ' + str + ' *';
 }
 
 // Задача 3
 function check(param) {
-	if (typeof param === null || typeof param === undefined) {
+	if (param === null || param === undefined) {
 		return true;
 	} else {
 		return false;
