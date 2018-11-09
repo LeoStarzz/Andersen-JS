@@ -20,6 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	var buttonEqual = document.querySelector(".button_equal");
 	var buttonAC = document.querySelector(".button_ac");
 	var history = document.querySelector(".history");
+	var buttonLeftbracket = document.querySelector(".button_leftbracket");
+	var buttonRightbracket = document.querySelector(".button_rightbracket");
+	var buttonPoint = document.querySelector(".button_point");
 
 	window.addEventListener('keydown', function (event) {
 		switch (event.keyCode) {
@@ -79,6 +82,10 @@ document.addEventListener("DOMContentLoaded", function () {
 				result = result + '/';
 				area.innerHTML = result;
 				break;
+			case 110:
+				result = result + '.';
+				area.innerHTML = result;
+				break;
 			case 13:
 				finalResult = eval(result);
 				area.innerHTML = finalResult;
@@ -86,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				div.innerHTML += result + ' = ' + finalResult;
 				history.appendChild(div);
 				result = '';
-	    	finalResult = '';
+				finalResult = '';
 				break;
 		}
 
@@ -176,6 +183,21 @@ document.addEventListener("DOMContentLoaded", function () {
 		finalResult = '';
 		result = '';
 		area.innerHTML = '';
+	});
+
+	buttonLeftbracket.addEventListener('click', function () {
+		result = result + '(';
+		area.innerHTML = result;
+	});
+
+	buttonRightbracket.addEventListener('click', function () {
+		result = result + ')';
+		area.innerHTML = result;
+	});
+
+	buttonPoint.addEventListener('click', function () {
+		result = result + '.';
+		area.innerHTML = result;
 	});
 
 });
