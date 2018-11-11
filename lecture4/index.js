@@ -23,6 +23,17 @@ document.addEventListener("DOMContentLoaded", function () {
 	var buttonLeftbracket = document.querySelector(".button_leftbracket");
 	var buttonRightbracket = document.querySelector(".button_rightbracket");
 	var buttonPoint = document.querySelector(".button_point");
+	var buttonClear = document.querySelector("button");
+
+	var data = JSON.parse(localStorage.getItem('items')) || [];
+	console.log(data);
+	if (data !== null) {
+		data.forEach(item => {
+			var div = document.createElement("div");
+			div.innerHTML += item;
+			history.appendChild(div);
+		});
+	}
 
 	window.addEventListener('keydown', function (event) {
 		switch (event.keyCode) {
@@ -87,11 +98,17 @@ document.addEventListener("DOMContentLoaded", function () {
 				area.innerHTML = result;
 				break;
 			case 13:
-				finalResult = eval(result);
+				try {
+					finalResult = eval(result);
+				} catch (err) {
+					alert("Введите правильное выражение!");
+				}
 				area.innerHTML = finalResult;
 				var div = document.createElement("div");
 				div.innerHTML += result + ' = ' + finalResult;
+				data.push(result + ' = ' + finalResult);
 				history.appendChild(div);
+				localStorage.setItem('items', JSON.stringify(data));
 				result = '';
 				finalResult = '';
 				break;
@@ -170,11 +187,17 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	buttonEqual.addEventListener('click', function () {
-		finalResult = eval(result);
+		try {
+			finalResult = eval(result);
+		} catch (err) {
+			alert("Введите правильное выражение!");
+		}
 		area.innerHTML = finalResult;
 		var div = document.createElement("div");
 		div.innerHTML += result + ' = ' + finalResult;
+		data.push(result + ' = ' + finalResult);
 		history.appendChild(div);
+		localStorage.setItem('items', JSON.stringify(data));
 		result = '';
 		finalResult = '';
 	});
@@ -198,6 +221,16 @@ document.addEventListener("DOMContentLoaded", function () {
 	buttonPoint.addEventListener('click', function () {
 		result = result + '.';
 		area.innerHTML = result;
+	});
+
+	buttonClear.addEventListener('click', function () {
+		localStorage.clear();
+		while (history.firstChild) {
+			history.removeChild(history.firstChild);
+		}
+		history.innerHTML = 'History';
+		data = [];
+
 	});
 
 });
