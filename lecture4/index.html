@@ -6,6 +6,12 @@
 	<title>Calculator</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="index.js"></script>
+	<script type="text/javascript"> document.addEventListener('click', function (e) {
+			if (document.activeElement.toString() == '[object HTMLButtonElement]') {
+				document.activeElement.blur();
+			}
+		});
+	</script>
 </head>
 
 <body>
@@ -48,8 +54,13 @@
 			</div>
 		</div>
 
-		<div class="history">
-			<h5>History</h5>
+		<div class="container_history">
+			<div class="history">
+				History
+			</div>
+			<button>
+				Clear
+			</button>
 		</div>
 	</div>
 </body>
