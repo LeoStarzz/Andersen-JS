@@ -8,17 +8,13 @@ var module = (function () {
 		  return param === null;
 		},
 
-		isNaN: function (param) {
-			return isNaN(param);
+		isNotaNumber: function (param) {
+			return param !== param;
 		},
 
 		checkObject: function (object) {
 			var keys = Object.keys(object);
-			if (keys.length === 0) {
-				return true;
-			} else {
-				return false;
-			}
+			return keys.length === 0;
 		},
 
 		mapObject: function (object, mapFn) {
