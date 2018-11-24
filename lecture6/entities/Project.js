@@ -4,7 +4,7 @@ var Project = (function () {
 		this.cost = 0;
 		this.linesOfCode;
 		this.manager;
-		this.remainsLinesOfCode;
+		this.linesOfCodeLeft;
 	}
 
 	Project.prototype.getCost = function (mode) {
@@ -26,18 +26,18 @@ var Project = (function () {
 	Project.prototype.getLinesOfCode = function (mode) {
 		if (mode === 'easy') {
 			this.linesOfCode =  utils.getRandomInRange(4000, 8000);
-			this.remainsLinesOfCode = this.linesOfCode;
+			this.linesOfCodeLeft = this.linesOfCode;
 			return this.linesOfCode;
 		}
 		else if (mode === 'medium') {
 			this.linesOfCode = utils.getRandomInRange(6000, 12000);
-			this.remainsLinesOfCode = this.linesOfCode;
+			this.linesOfCodeLeft = this.linesOfCode;
 			return this.linesOfCode;
 		}
 
 		else if (mode === 'hard') {
 			this.linesOfCode =utils.getRandomInRange(10000, 20000);
-			this.remainsLinesOfCode = this.linesOfCode;
+			this.linesOfCodeLeft = this.linesOfCode;
 			return this.linesOfCode;
 		}
 	}
