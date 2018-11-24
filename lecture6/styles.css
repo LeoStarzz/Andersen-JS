@@ -100,7 +100,7 @@ html, body {
 }
 
 .project-form {
-  width: 30%;
+	width: 30%;
 	margin-right: 25px;
 }
 
@@ -110,7 +110,7 @@ html, body {
 }
 
 .developer-form {
-  width: 30%;
+	width: 30%;
 }
 
 .user-data {
@@ -124,6 +124,7 @@ html, body {
 
 .time {
 	display: inline-block;
+	margin-right: 10px;
 }
 
 .budget-text {
@@ -142,6 +143,8 @@ html, body {
 	color: white;
 	cursor: pointer;
 	margin-top: 10px;
+	display: table-cell;
+	vertical-align: middle;
 }
 
 .fire {
