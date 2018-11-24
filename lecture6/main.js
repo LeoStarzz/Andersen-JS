@@ -35,7 +35,7 @@ var main = (function () {
 				totalLines = 0;
 
 				for (var i = 0; i < projects.length; i++) {
-					if (projects[i].remainsLinesOfCode <= 0) {
+					if (projects[i].linesOfCodeLeft <= 0) {
 						budget = budget + projects[i].cost;
 						projects[i].manager.state = 'Free';
 						freeManagers.push(projects[i].manager);
@@ -59,12 +59,12 @@ var main = (function () {
 
 							totalLines = totalLines * projects[i].manager.getQuotient();
 						}
-						if (projects[i].remainsLinesOfCode - totalLines < 0) {
-							projects[i].remainsLinesOfCode = 0;
+						if (projects[i].linesOfCodeLeft - totalLines < 0) {
+							projects[i].linesOfCodeLeft = 0;
 						} else {
-							projects[i].remainsLinesOfCode = projects[i].remainsLinesOfCode - totalLines;
+							projects[i].linesOfCodeLeft = projects[i].linesOfCodeLeft - totalLines;
 						}
-						dom.userProjects.children[i].children[0].innerHTML = 'Lines remain: ' + projects[i].remainsLinesOfCode;
+						dom.userProjects.children[i].children[0].innerHTML = 'Lines remain: ' + projects[i].linesOfCodeLeft;
 						totalLines = 0;
 					}
 				}
@@ -116,18 +116,16 @@ var main = (function () {
 			var projectName = dom.projectNameInput.value;
 			var project = new Project(projectName);
 
-			dom.createNewProject(project.name, project.getCost(mode), project.getLinesOfCode(mode), project.remainsLinesOfCode);
+			dom.createNewProject(project.name, project.getCost(mode), project.getLinesOfCode(mode), project.linesOfCodeLeft);
 
 			freeProjects.push(project);
 			var manager = null;
 			if (freeManagers.length !== 0) {
 				manager = freeManagers[0];
 				manager.state = freeProjects[0].name;
-				managers.push(manager);
 				busyManagers.push(manager);
 				freeProjects[0].manager = manager;
 				projects.push(freeProjects[0]);
-
 
 				for (var i = 0; i < freeDevelopers.length; i++) {
 					if (manager.developers < 5) {
@@ -296,6 +294,11 @@ var main = (function () {
 		projects = [];
 		managers = [];
 		developers = [];
+		busyDevelopers = [];
+		busyManagers = [];
+		freeDevelopers = [];
+		freeManagers = [];
+		freeProjects = [];
 		isOn = false;
 	}
 
