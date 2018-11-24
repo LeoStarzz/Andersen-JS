@@ -64,7 +64,7 @@ var main = (function () {
 						} else {
 							projects[i].linesOfCodeLeft = projects[i].linesOfCodeLeft - totalLines;
 						}
-						dom.userProjects.children[i].children[0].innerHTML = 'Lines remain: ' + projects[i].linesOfCodeLeft;
+						dom.userProjects.children[i].children[0].innerHTML = 'Lines left: ' + projects[i].linesOfCodeLeft;
 						totalLines = 0;
 					}
 				}
