@@ -304,8 +304,8 @@ var main = (function () {
 		for (var i = 0; i < developers.length; i++) {
 			totalSalary = totalSalary + developers[i].getSalary();
 		}
-		for (var i = 0; i < managers.length; i++) {
-			totalSalary = totalSalary + managers[i].getSalary();
+		for (var j = 0; j < managers.length; j++) {
+			totalSalary = totalSalary + managers[j].getSalary();
 		}
 		return totalSalary;
 	}
