@@ -40,6 +40,7 @@ var dom = (function () {
 			dom.mediumButton.classList.remove('button-active');
 			dom.hardButton.classList.remove('button-active');
 			dom.userSettings.className = "show";
+			dom.userCompanyName.innerHTML = '';
 
 			while (dom.userProjects.firstChild) {
 				dom.userProjects.removeChild(dom.userProjects.firstChild);
@@ -82,13 +83,13 @@ var dom = (function () {
 			dom.userManagers.appendChild(div);
 		},
 
-		createNewProject: function (name, cost, linesOfCode, remainsLinesOfCode) {
+		createNewProject: function (name, cost, linesOfCode, linesOfCodeLeft) {
 			var div = document.createElement('div');
 			div.appendChild(document.createTextNode('Name:' + ' ' + name + ', '));
 			div.appendChild(document.createTextNode('Cost:' + ' ' + cost + ', '));
 			div.appendChild(document.createTextNode('Lines needed:' + ' ' + linesOfCode + ', '));
 			var p = document.createElement('p');
-			p.appendChild(document.createTextNode('Lines remain:' + ' ' + remainsLinesOfCode));
+			p.appendChild(document.createTextNode('Lines left:' + ' ' + linesOfCodeLeft));
 			div.appendChild(p);
 			dom.userProjects.appendChild(div);
 		},
