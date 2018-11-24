@@ -1,7 +1,6 @@
 var Company = (function () {
-	function Company(name, money) {
+	function Company(name) {
 		this.name = name;
-		this.money = money;
 	}
 
 	return Company;

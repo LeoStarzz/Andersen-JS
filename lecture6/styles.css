@@ -6,6 +6,7 @@ html, body {
 .main-header {
 	text-align: center;
 	font-size: 20px;
+	letter-spacing: 0.5ch;
 }
 
 .header {
@@ -99,19 +100,22 @@ html, body {
 }
 
 .project-form {
-	width: 33%;
+  width: 30%;
+	margin-right: 25px;
 }
 
 .manager-form {
-	width: 33%;
+	width: 30%;
+	margin-right: 25px;
 }
 
 .developer-form {
-	width: 33%;
+  width: 30%;
 }
 
 .user-data {
 	margin-top: 20px;
+	margin-bottom: 15px;
 }
 
 .time-text {
@@ -152,4 +156,32 @@ html, body {
 	margin-top: 8px;
 	margin-bottom: 8px;
 	margin-left: 8px;
+}
+
+.user-company-name {
+	font-size: 22px;
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
+}
+
+.inline {
+	display: inline-block;
+}
+
+.user-projects {
+	border: 1px solid #c9c2c2;
+}
+
+.user-managers {
+	border: 1px solid #c9c2c2;
+}
+
+.user-developers {
+	border: 1px solid #c9c2c2;
 }

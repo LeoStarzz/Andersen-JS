@@ -3,36 +3,41 @@ var Project = (function () {
 		this.name = name;
 		this.cost = 0;
 		this.linesOfCode;
+		this.manager;
+		this.remainsLinesOfCode;
 	}
 
 	Project.prototype.getCost = function (mode) {
 		if (mode === 'easy') {
-			this.cost = Math.floor(Math.random() * (100000 - 30000 + 1)) + 30000;
+			this.cost = utils.getRandomInRange(30000, 100000);
 			return this.cost;
 		}
 		else if (mode === 'medium') {
-			this.cost = Math.floor(Math.random() * (60000 - 15000 + 1)) + 15000;
+			this.cost = utils.getRandomInRange(15000, 60000);
 			return this.cost;
 
 		}
 		else if (mode === 'hard') {
-			this.cost = Math.floor(Math.random() * (40000 - 10000 + 1)) + 10000;
+			this.cost = utils.getRandomInRange(10000, 40000);
 			return this.cost;
 		}
 	};
 
 	Project.prototype.getLinesOfCode = function (mode) {
 		if (mode === 'easy') {
-			this.linesOfCode =  Math.floor(Math.random() * (8000 - 4000 + 1)) + 4000;
+			this.linesOfCode =  utils.getRandomInRange(4000, 8000);
+			this.remainsLinesOfCode = this.linesOfCode;
 			return this.linesOfCode;
 		}
 		else if (mode === 'medium') {
-			this.linesOfCode = Math.floor(Math.random() * (12000 - 6000 + 1)) + 6000;
+			this.linesOfCode = utils.getRandomInRange(6000, 12000);
+			this.remainsLinesOfCode = this.linesOfCode;
 			return this.linesOfCode;
 		}
 
 		else if (mode === 'hard') {
-			this.linesOfCode = Math.floor(Math.random() * (20000 - 10000 + 1)) + 10000;
+			this.linesOfCode =utils.getRandomInRange(10000, 20000);
+			this.remainsLinesOfCode = this.linesOfCode;
 			return this.linesOfCode;
 		}
 	}

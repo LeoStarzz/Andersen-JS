@@ -4,6 +4,8 @@ var Manager = (function () {
 		this.surname = surname;
 		this.experience = experience;
 		this.salary;
+		this.state;
+		this.developers = [];
 	}
 
 	Manager.prototype.getSalary = function() {

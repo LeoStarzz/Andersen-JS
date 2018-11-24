@@ -10,16 +10,18 @@
 <body>
 	<p class='main-header'>Your IT company!</p>
 	<hr>
-	<div class="company-name-form">
-		<label class="company-name">Company name: </label>
-		<input class="company-name-input">
-	</div>
+	<div class="settings">
+		<div class="company-name-form">
+			<label class="company-name">Company name: </label>
+			<input class="company-name-input">
+		</div>
 
-	<div class="mode">
-		Choose your mode:
-		<div class="easy">Easy</div>
-		<div class="medium">Medium</div>
-		<div class="hard">Hard</div>
+		<div class="mode">
+			Choose your mode:
+			<div class="easy">Easy</div>
+			<div class="medium">Medium</div>
+			<div class="hard">Hard</div>
+		</div>
 	</div>
 
 	<div class="start">
@@ -30,6 +32,10 @@
 		Stop
 	</div>
 
+	<div class="user-company-name">
+
+	</div>
+
 	<p class="time-text">Time:</p>
 	<div class="time">
 		0
@@ -37,6 +43,10 @@
 
 	<p class="budget-text">Your budget:</p>
 	<div class="budget">
+
+	</div>
+
+	<div class="statistics">
 
 	</div>
 
@@ -105,11 +115,12 @@
 		</div>
 	</div>
 
-	<script src="elements.js"></script>
-	<script src='Company.js'></script>
-	<script src='Developer.js'></script>
-	<script src='Manager.js'></script>
-	<script src='Project.js'></script>
+	<script src="dom.js"></script>
+	<script src="utils.js"></script>
+	<script src='entities/Company.js'></script>
+	<script src='entities/Developer.js'></script>
+	<script src='entities/Manager.js'></script>
+	<script src='entities/Project.js'></script>
 	<script src='main.js'></script>
 </body>
 

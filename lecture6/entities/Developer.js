@@ -3,7 +3,8 @@ var Developer = (function () {
 		this.name = name;
 		this.surname = surname;
 		this.experience = experience;
-		this.lines = 0;
+		this.lines;
+		this.state;
 	}
 
 	Developer.prototype.getSalary = function () {
@@ -24,15 +25,15 @@ var Developer = (function () {
 				alert('Опыт должен быть больше 0 лет');
 			}
 			else if (this.experience < 2) {
-				this.lines = Math.floor(Math.random() * (600 - 400 + 1)) + 400;
+				this.lines = utils.getRandomInRange(400, 600);
 				return this.lines;
 			}
 			else if (this.experience < 5) {
-				this.lines = Math.floor(Math.random() * (900 - 700 + 1)) + 700;
+				this.lines = utils.getRandomInRange(700, 900);
 				return this.lines;
 			}
 			else {
-				this.lines = Math.floor(Math.random() * (1400 - 1000 + 1)) + 1000;
+				this.lines = utils.getRandomInRange(1000, 1400);
 				return this.lines;
 			}
 		}
@@ -41,15 +42,15 @@ var Developer = (function () {
 				alert('Опыт должен быть больше 0 лет');
 			}
 			else if (this.experience < 2) {
-				this.lines = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
+				this.lines = utils.getRandomInRange(300, 500);
 				return this.lines;
 			}
 			else if (this.experience < 5) {
-				this.lines = Math.floor(Math.random() * (800 - 600 + 1)) + 600;
+				this.lines = utils.getRandomInRange(600, 800);
 				return this.lines;
 			}
 			else {
-				this.lines = Math.floor(Math.random() * (1200 - 800 + 1)) + 800;
+				this.lines = utils.getRandomInRange(800, 1200);
 				return this.lines;
 			}
 		}
@@ -59,15 +60,15 @@ var Developer = (function () {
 				alert('Опыт должен быть больше 0 лет');
 			}
 			else if (this.experience < 2) {
-				this.lines = Math.floor(Math.random() * (400 - 200 + 1)) + 200;
+				this.lines = utils.getRandomInRange(200, 400);
 				return this.lines;
 			}
 			else if (this.experience < 5) {
-				this.lines = Math.floor(Math.random() * (700 - 500 + 1)) + 500;
+				this.lines = utils.getRandomInRange(500, 700);
 				return this.lines;
 			}
 			else {
-				this.lines = Math.floor(Math.random() * (1000 - 600 + 1)) + 600;
+				this.lines = utils.getRandomInRange(800, 1000);
 				return this.lines;
 			}
 		}
