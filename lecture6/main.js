@@ -46,7 +46,7 @@ var main = (function () {
 						}
 						for (var p = 0; p < dom.userDevelopers.childElementCount; p++) {
 							if (dom.userDevelopers.children[p].children[0].innerHTML === 'Project: ' + projects[i].name) {
-								dom.userDevelopers.children[p].children[0].innerHTML = 'Project: ' + 'Free';
+								dom.userDevelopers.children[p].children[0].innerHTML = 'Project: Free';
 							}
 						}
 						projects.splice(projects.indexOf(projects[i]), 1);
@@ -137,7 +137,7 @@ var main = (function () {
 				var count = 0;
 				for (var j = 0; j < dom.userDevelopers.childElementCount; j++) {
 					if (count < 5) {
-						if (dom.userDevelopers.children[j].children[0].innerHTML === 'Project: ' + 'Free') {
+						if (dom.userDevelopers.children[j].children[0].innerHTML === 'Project: Free') {
 							dom.userDevelopers.children[j].children[0].innerHTML = 'Project: ' + freeProjects[0].name;
 							count++;
 						}
@@ -147,7 +147,7 @@ var main = (function () {
 				freeManagers.pop();
 
 				for (var i = 0; i < dom.userManagers.childElementCount; i++) {
-					if (dom.userManagers.children[i].children[0].innerHTML === 'Project: ' + 'Free') {
+					if (dom.userManagers.children[i].children[0].innerHTML === 'Project: Free') {
 						dom.userManagers.children[i].children[0].innerHTML = 'Project: ' + freeProjects[0].name;
 						break;
 					}
@@ -187,7 +187,7 @@ var main = (function () {
 				var count = 0;
 				for (var i = 0; i < dom.userDevelopers.childElementCount; i++) {
 					if (count < 5) {
-						if (dom.userDevelopers.children[i].children[0].innerHTML === 'Project: ' + 'Free') {
+						if (dom.userDevelopers.children[i].children[0].innerHTML === 'Project: Free') {
 							dom.userDevelopers.children[i].children[0].innerHTML = 'Project: ' + freeProjects[0].name;
 							count++;
 						}
@@ -219,7 +219,7 @@ var main = (function () {
 								projects[j].manager = null;
 								for (var i = 0; i < dom.userDevelopers.childElementCount; i++) {
 									if (dom.userDevelopers.children[i].children[0].innerHTML === 'Project: ' + projects[j].name) {
-										dom.userDevelopers.children[i].children[0].innerHTML = 'Project: ' + 'Free';
+										dom.userDevelopers.children[i].children[0].innerHTML = 'Project: Free';
 									}
 								}
 								console.log(freeProjects);
