@@ -1,4 +1,4 @@
-export class Manager {
+export default class Manager {
 	constructor(name, surname, experience = 1) {
 		this.name = name;
 		this.surname = surname;

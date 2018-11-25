@@ -1,6 +1,6 @@
 import { getRandomInRange } from "../utils";
 
-export class Project {
+export default class Project {
 		constructor(name = 'New project') {
 			this.name = name;
 			this.cost;

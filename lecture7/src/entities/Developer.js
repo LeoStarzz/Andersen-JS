@@ -1,6 +1,6 @@
-import getRandomInRange  from "utils";
+import { getRandomInRange }  from "../utils";
 
-export class Developer {
+export default class Developer {
 	constructor(name, surname, experience = 1) {
 		this.name = name;
 		this.surname = surname;
