@@ -25,7 +25,7 @@ var dom = (function () {
 		userSettings: document.querySelector('.settings'),
 		userStatistics: document.querySelector('.statistics'),
 
-		clearDOM: function () {
+		clearDOM() {
 			dom.timeDiv.innerHTML = '';
 			dom.budgetDiv.innerHTML = '';
 			dom.companyNameInput.value = '';
@@ -53,7 +53,7 @@ var dom = (function () {
 			}
 		},
 
-		createNewDeveloper: function (name, surname, experience, lines, state, fireButton, div) {
+		createNewDeveloper(name, surname, experience, lines, state, fireButton, div) {
 			fireButton.className = 'fire';
 			fireButton.innerHTML = 'Fire';
 			div.appendChild(document.createTextNode('Name:' + ' ' + name + ', '));
@@ -68,7 +68,7 @@ var dom = (function () {
 			dom.userDevelopers.appendChild(div);
 		},
 
-		createNewManager: function (name, surname, experience, quotient, state, fireButton, div) {
+		createNewManager(name, surname, experience, quotient, state, fireButton, div) {
 			fireButton.className = 'fire';
 			fireButton.innerHTML = 'Fire';
 			div.appendChild(document.createTextNode('Name:' + ' ' + name + ', '));
@@ -83,7 +83,7 @@ var dom = (function () {
 			dom.userManagers.appendChild(div);
 		},
 
-		createNewProject: function (name, cost, linesOfCode, linesOfCodeLeft) {
+		createNewProject(name, cost, linesOfCode, linesOfCodeLeft) {
 			var div = document.createElement('div');
 			div.appendChild(document.createTextNode('Name:' + ' ' + name + ', '));
 			div.appendChild(document.createTextNode('Cost:' + ' ' + cost + ', '));
@@ -94,7 +94,7 @@ var dom = (function () {
 			dom.userProjects.appendChild(div);
 		},
 
-		isEasySelected: function (time, budget) {
+		isEasySelected(time, budget) {
 			dom.timeDiv.innerHTML = time;
 			dom.budgetDiv.innerHTML = budget;
 			dom.easyButton.className = 'easy button-active';
@@ -102,7 +102,7 @@ var dom = (function () {
 			dom.hardButton.className = 'hard';
 		},
 
-		isMediumSelected: function (time, budget) {
+		isMediumSelected(time, budget) {
 			dom.timeDiv.innerHTML = time;
 			dom.budgetDiv.innerHTML = budget;
 			dom.mediumButton.className = 'medium button-active';
@@ -110,7 +110,7 @@ var dom = (function () {
 			dom.hardButton.className = 'hard';
 		},
 
-		isHardSelected: function (time, budget) {
+		isHardSelected(time, budget) {
 			dom.timeDiv.innerHTML = time;
 			dom.budgetDiv.innerHTML = budget;
 			dom.hardButton.className = 'hard button-active';
