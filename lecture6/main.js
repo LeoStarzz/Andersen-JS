@@ -114,46 +114,51 @@ var main = (function () {
 	dom.addProjectButton.addEventListener('click', function () {
 		if (isOn) {
 			var projectName = dom.projectNameInput.value;
-			var project = new Project(projectName);
+			if (utils.isProjectExists(projectName, projects, freeProjects)) {
+				alert('Project with this name already exists!');
+			} else {
+				var project = new Project(projectName);
 
-			dom.createNewProject(project.name, project.getCost(mode), project.getLinesOfCode(mode), project.linesOfCodeLeft);
+				dom.createNewProject(project.name, project.getCost(mode), project.getLinesOfCode(mode), project.linesOfCodeLeft);
 
-			freeProjects.push(project);
-			var manager = null;
-			if (freeManagers.length !== 0) {
-				manager = freeManagers[0];
-				manager.state = freeProjects[0].name;
-				busyManagers.push(manager);
-				freeProjects[0].manager = manager;
-				projects.push(freeProjects[0]);
+				freeProjects.push(project);
+				var manager = null;
+				if (freeManagers.length !== 0) {
+					manager = freeManagers[0];
+					manager.state = freeProjects[0].name;
+					busyManagers.push(manager);
+					freeProjects[0].manager = manager;
+					projects.push(freeProjects[0]);
 
-				for (var i = 0; i < freeDevelopers.length; i++) {
-					if (manager.developers < 5) {
-						manager.developers.push(freeDevelopers[i]);
-					}
-				}
-				var count = 0;
-				for (var j = 0; j < dom.userDevelopers.childElementCount; j++) {
-					if (count < 5) {
-						if (dom.userDevelopers.children[j].children[0].innerHTML === 'Project: Free') {
-							dom.userDevelopers.children[j].children[0].innerHTML = 'Project: ' + freeProjects[0].name;
-							count++;
+					for (var i = 0; i < freeDevelopers.length; i++) {
+						if (manager.developers < 5) {
+							manager.developers.push(freeDevelopers[i]);
 						}
 					}
-				}
 
-				freeManagers.pop();
-
-				for (var i = 0; i < dom.userManagers.childElementCount; i++) {
-					if (dom.userManagers.children[i].children[0].innerHTML === 'Project: Free') {
-						dom.userManagers.children[i].children[0].innerHTML = 'Project: ' + freeProjects[0].name;
-						break;
+					var count = 0;
+					for (var j = 0; j < dom.userDevelopers.childElementCount; j++) {
+						if (count < 5) {
+							if (dom.userDevelopers.children[j].children[0].innerHTML === 'Project: Free') {
+								dom.userDevelopers.children[j].children[0].innerHTML = 'Project: ' + freeProjects[0].name;
+								count++;
+							}
+						}
 					}
+
+					freeManagers.pop();
+
+					for (var i = 0; i < dom.userManagers.childElementCount; i++) {
+						if (dom.userManagers.children[i].children[0].innerHTML === 'Project: Free') {
+							dom.userManagers.children[i].children[0].innerHTML = 'Project: ' + freeProjects[0].name;
+							break;
+						}
+					}
+					freeProjects.shift();
 				}
-				freeProjects.shift();
 			}
 		} else {
-			alert('You need to choose mode and start the game first!');
+			alert("You need to choose mode and start the game first!");
 		}
 	});
 
@@ -161,74 +166,78 @@ var main = (function () {
 		if (isOn) {
 			var managerName = dom.managerNameInput.value;
 			var managerSurname = dom.managerSurnameInput.value;
-			var managerExperience = dom.managerExperienceInput.value;
-			var fireButton = document.createElement('div');
-			var div = document.createElement('div');
-
-			var manager = new Manager(managerName, managerSurname, managerExperience);
-			if (freeProjects.length === 0) {
-				manager.state = 'Free';
-				managers.push(manager);
-				freeManagers.push(manager);
+			if (utils.isManagerExists(managerName, managerSurname, managers)) {
+				alert("Manager with this name and surname already exists!");
 			} else {
-				manager.state = freeProjects[0].name;
-				managers.push(manager);
-				busyManagers.push(manager);
-				freeProjects[0].manager = manager;
-				projects.push(freeProjects[0]);
+				var managerExperience = dom.managerExperienceInput.value;
+				var fireButton = document.createElement('div');
+				var div = document.createElement('div');
 
-				for (var i = 0; i < freeDevelopers.length; i++) {
-					if (manager.developers < 5) {
-						manager.developers.push(freeDevelopers[i]);
-					}
-				}
-				var count = 0;
-				for (var i = 0; i < dom.userDevelopers.childElementCount; i++) {
-					if (count < 5) {
-						if (dom.userDevelopers.children[i].children[0].innerHTML === 'Project: Free') {
-							dom.userDevelopers.children[i].children[0].innerHTML = 'Project: ' + freeProjects[0].name;
-							count++;
+				var manager = new Manager(managerName, managerSurname, managerExperience);
+				if (freeProjects.length === 0) {
+					manager.state = 'Free';
+					managers.push(manager);
+					freeManagers.push(manager);
+				} else {
+					manager.state = freeProjects[0].name;
+					managers.push(manager);
+					busyManagers.push(manager);
+					freeProjects[0].manager = manager;
+					projects.push(freeProjects[0]);
+
+					for (var i = 0; i < freeDevelopers.length; i++) {
+						if (manager.developers < 5) {
+							manager.developers.push(freeDevelopers[i]);
 						}
 					}
-				}
-			}
-			freeProjects.shift();
-
-			dom.createNewManager(manager.name, manager.surname, manager.experience, manager.getQuotient(), manager.state, fireButton, div);
-
-			fireButton.addEventListener('click', function () {
-				if (manager.state === 'Free') {
-					managers.splice(managers.indexOf(manager), 1);
-					freeManagers.splice(managers.indexOf(manager), 1);
-					dom.userManagers.removeChild(div);
-					console.log(freeProjects);
-				} else {
-					managers.splice(managers.indexOf(manager), 1);
-					busyManagers.splice(managers.indexOf(manager), 1);
-					for (var i = 0; i < manager.developers.length; i++) {
-						manager.developers[i].state = 'Free';
-						freeDevelopers.push(manager.developers[i]);
-					}
-
-					for (var j = 0; j < projects.length; j++) {
-						if (projects[j].manager !== null) {
-							if (projects[j].manager.name === manager.name && projects[j].manager.surname === manager.surname) {
-								freeProjects.push(projects[j]);
-								projects[j].manager = null;
-								for (var i = 0; i < dom.userDevelopers.childElementCount; i++) {
-									if (dom.userDevelopers.children[i].children[0].innerHTML === 'Project: ' + projects[j].name) {
-										dom.userDevelopers.children[i].children[0].innerHTML = 'Project: Free';
-									}
-								}
-								console.log(freeProjects);
+					var count = 0;
+					for (var i = 0; i < dom.userDevelopers.childElementCount; i++) {
+						if (count < 5) {
+							if (dom.userDevelopers.children[i].children[0].innerHTML === 'Project: Free') {
+								dom.userDevelopers.children[i].children[0].innerHTML = 'Project: ' + freeProjects[0].name;
+								count++;
 							}
 						}
 					}
-					dom.userManagers.removeChild(div);
 				}
-			});
+				freeProjects.shift();
+
+				dom.createNewManager(manager.name, manager.surname, manager.experience, manager.getQuotient(), manager.state, fireButton, div);
+
+				fireButton.addEventListener('click', function () {
+					if (manager.state === 'Free') {
+						managers.splice(managers.indexOf(manager), 1);
+						freeManagers.splice(managers.indexOf(manager), 1);
+						dom.userManagers.removeChild(div);
+						console.log(freeProjects);
+					} else {
+						managers.splice(managers.indexOf(manager), 1);
+						busyManagers.splice(managers.indexOf(manager), 1);
+						for (var i = 0; i < manager.developers.length; i++) {
+							manager.developers[i].state = 'Free';
+							freeDevelopers.push(manager.developers[i]);
+						}
+
+						for (var j = 0; j < projects.length; j++) {
+							if (projects[j].manager !== null) {
+								if (projects[j].manager.name === manager.name && projects[j].manager.surname === manager.surname) {
+									freeProjects.push(projects[j]);
+									projects[j].manager = null;
+									for (var i = 0; i < dom.userDevelopers.childElementCount; i++) {
+										if (dom.userDevelopers.children[i].children[0].innerHTML === 'Project: ' + projects[j].name) {
+											dom.userDevelopers.children[i].children[0].innerHTML = 'Project: Free';
+										}
+									}
+									console.log(freeProjects);
+								}
+							}
+						}
+						dom.userManagers.removeChild(div);
+					}
+				});
+			}
 		} else {
-			alert('You need to choose mode and start the game first!');
+			alert("You need to choose mode and start the game first!");
 		}
 	});
 
@@ -236,50 +245,55 @@ var main = (function () {
 		if (isOn) {
 			if (developers.length >= managers.length * 5) {
 				alert("You don't have enough managers!");
-			} else {
+			}
+			else {
 				var developerName = dom.developerNameInput.value;
 				var developerSurname = dom.developerSurnameInput.value;
-				var developerExperience = dom.developerExperienceInput.value;
-				var developer = new Developer(developerName, developerSurname, developerExperience);
-				var hired = false;
-				var fireButton = document.createElement('div');
-				var div = document.createElement('div');
+				if (utils.isDeveloperExists(developerName, developerSurname, developers)) {
+					alert("Developer with this name and surname already exists!");
+				} else {
+					var developerExperience = dom.developerExperienceInput.value;
+					var developer = new Developer(developerName, developerSurname, developerExperience);
+					var hired = false;
+					var fireButton = document.createElement('div');
+					var div = document.createElement('div');
 
-				for (var i = 0; i < projects.length; i++) {
-					if (projects[i].manager !== null) {
-						if (projects[i].manager.developers.length < 5) {
-							projects[i].manager.developers.push(developer);
-							developer.state = projects[i].name;
-							busyDevelopers.push(developer);
-							hired = true;
-							break;
-						}
-					}
-				}
-
-				if (hired === false) {
-					freeDevelopers.push(developer);
-					developer.state = 'Free';
-				}
-
-				dom.createNewDeveloper(developer.name, developer.surname, developer.experience, developer.getLines(mode), developer.state, fireButton, div);
-
-				fireButton.addEventListener('click', function () {
-					if (developer.state === 'Free') {
-						freeDevelopers.splice(developers.indexOf(developer), 1);
-						developers.splice(developers.indexOf(developer), 1);
-						dom.userDevelopers.removeChild(div);
-					} else {
-						for (var i = 0; i < projects.length; i++) {
-							if (projects[i].manager.developers.indexOf(developer) !== -1) {
-								projects[i].manager.developers.splice(projects[i].manager.developers.indexOf(developer), 1);
+					for (var i = 0; i < projects.length; i++) {
+						if (projects[i].manager !== null) {
+							if (projects[i].manager.developers.length < 5) {
+								projects[i].manager.developers.push(developer);
+								developer.state = projects[i].name;
+								busyDevelopers.push(developer);
+								hired = true;
+								break;
 							}
 						}
-						developers.splice(developers.indexOf(developer), 1);
-						dom.userDevelopers.removeChild(div);
 					}
-				});
-				developers.push(developer);
+
+					if (hired === false) {
+						freeDevelopers.push(developer);
+						developer.state = 'Free';
+					}
+
+					dom.createNewDeveloper(developer.name, developer.surname, developer.experience, developer.getLines(mode), developer.state, fireButton, div);
+
+					fireButton.addEventListener('click', function () {
+						if (developer.state === 'Free') {
+							freeDevelopers.splice(developers.indexOf(developer), 1);
+							developers.splice(developers.indexOf(developer), 1);
+							dom.userDevelopers.removeChild(div);
+						} else {
+							for (var i = 0; i < projects.length; i++) {
+								if (projects[i].manager.developers.indexOf(developer) !== -1) {
+									projects[i].manager.developers.splice(projects[i].manager.developers.indexOf(developer), 1);
+								}
+							}
+							developers.splice(developers.indexOf(developer), 1);
+							dom.userDevelopers.removeChild(div);
+						}
+					});
+					developers.push(developer);
+				}
 			}
 		} else {
 			alert('You need to choose mode and start the game first!');
