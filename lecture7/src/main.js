@@ -80,7 +80,8 @@ export const main = function () {
 							projects[i].remainsLinesOfCode = projects[i].remainsLinesOfCode - totalLines;
 						}
 						DOM.userProjects.children[i].children[0].innerHTML = `Lines remain:
-						                                                     ${projects[i].remainsLinesOfCode}`;
+																																 ${projects[i].remainsLinesOfCode}`;
+					  totalLines = 0;
 					}
 				}
 
@@ -202,7 +203,7 @@ export const main = function () {
 					managers.push(manager);
 					freeManagers.push(manager);
 				} else
-				// Если есть свободный проект
+				  // Если есть свободный проект
 				{
 					manager.state = freeProjects[0].name;
 					managers.push(manager);
@@ -246,7 +247,7 @@ export const main = function () {
 						managers.splice(managers.indexOf(manager), 1);
 						busyManagers.splice(managers.indexOf(manager), 1);
 
-						// Освобождаем разработчиков, работающий на этом проекте
+						// Освобождаем разработчиков, работающих на этом проекте
 						for (let i = 0; i < manager.developers.length; i++) {
 							manager.developers[i].state = 'Free';
 							freeDevelopers.push(manager.developers[i]);
@@ -258,7 +259,7 @@ export const main = function () {
 								if (projects[j].manager.name === manager.name && projects[j].manager.surname === manager.surname) {
 									freeProjects.push(projects[j]);
 									projects[j].manager = null;
-									// Обновляем DOM для разработчиков, работающий на проекте
+									// Обновляем DOM для разработчиков, работающих на проекте
 									for (let i = 0; i < DOM.userDevelopers.childElementCount; i++) {
 										if (DOM.userDevelopers.children[i].children[0].innerHTML === 'Project: ' + projects[j].name) {
 											DOM.userDevelopers.children[i].children[0].innerHTML = 'Project: Free';
@@ -325,7 +326,7 @@ export const main = function () {
 							developers.splice(developers.indexOf(developer), 1);
 							DOM.userDevelopers.removeChild(div);
 						} else
-						// Если занятный на проекте
+						// Если занятый на проекте
 						{
 							// Ищем на каком проекте работает и удаляем
 							for (let i = 0; i < projects.length; i++) {
