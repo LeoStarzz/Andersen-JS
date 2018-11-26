@@ -352,6 +352,11 @@ export const main = function () {
 		projects = [];
 		managers = [];
 		developers = [];
+		busyDevelopers = [];
+		busyManagers = [];
+		freeDevelopers = [];
+		freeManagers = [];
+		freeProjects = [];
 		isOn = false;
 	}
 
