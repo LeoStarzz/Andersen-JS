@@ -90,11 +90,6 @@ html, body {
 	margin-bottom: 15px;
 }
 
-.company-input {
-	height: 20px;
-	border: 1px solid #aa9f9fa4;
-}
-
 .game-container {
 	display: flex;
 }
@@ -187,4 +182,30 @@ html, body {
 
 .user-developers {
 	border: 1px solid #c9c2c2;
+}
+
+.input {
+	width: 80%;
+	display: inline-block;
+	height: 15px;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+}
+
+.company-name-input {
+	width: 20%;
+}
+
+.project-name-input {
+	margin-bottom: 15px;
+}
+
+.manager-experience-input {
+	margin-bottom: 15px;
+}
+
+.developer-experience-input {
+	margin-bottom: 15px;
 }

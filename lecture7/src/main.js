@@ -77,7 +77,7 @@ export const main = function () {
 						if (projects[i].remainsLinesOfCode - totalLines < 0) {
 							projects[i].remainsLinesOfCode = 0;
 						} else {
-							projects[i].remainsLinesOfCode = projects[i].remainsLinesOfCode - totalLines;
+							projects[i].remainsLinesOfCode = Math.round(projects[i].remainsLinesOfCode - totalLines);
 						}
 						DOM.userProjects.children[i].children[0].innerHTML = `Lines remain:
 																																 ${projects[i].remainsLinesOfCode}`;
