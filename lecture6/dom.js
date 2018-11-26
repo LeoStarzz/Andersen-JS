@@ -24,6 +24,7 @@ var dom = (function () {
 		userCompanyName: document.querySelector('.user-company-name'),
 		userSettings: document.querySelector('.settings'),
 		userStatistics: document.querySelector('.statistics'),
+		error: document.querySelector('.error'),
 
 		clearDOM() {
 			dom.timeDiv.innerHTML = '';

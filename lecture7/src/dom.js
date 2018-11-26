@@ -24,6 +24,7 @@ export default class Dom {
 	this.userCompanyName = document.querySelector('.user-company-name');
 	this.userSettings = document.querySelector('.settings');
 	this.userStatistics = document.querySelector('.statistics');
+	this.error = document.querySelector('.error');
 	}
 
 	clearDOM() {

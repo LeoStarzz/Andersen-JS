@@ -209,3 +209,9 @@ html, body {
 .developer-experience-input {
 	margin-bottom: 15px;
 }
+
+.error {
+	margin-left: 40px;
+	display: inline-block;
+	color: red;
+}

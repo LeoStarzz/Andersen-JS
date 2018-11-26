@@ -29,7 +29,7 @@ export const main = function () {
 
 	DOM.startButton.addEventListener('click', () => {
 		if (!isModeSelected) {
-			alert("Choose mode!");
+			error('Choose mode!');
 		} else {
 			isOn = true;
 			const companyName = DOM.companyNameInput.value;
@@ -81,7 +81,7 @@ export const main = function () {
 						}
 						DOM.userProjects.children[i].children[0].innerHTML = `Lines remain:
 																																 ${projects[i].remainsLinesOfCode}`;
-					  totalLines = 0;
+						totalLines = 0;
 					}
 				}
 
@@ -133,7 +133,7 @@ export const main = function () {
 		if (isOn) {
 			const projectName = DOM.projectNameInput.value;
 			if (isProjectExists(projectName, projects, freeProjects)) {
-				alert('Project with this name already exists!');
+				error('Project with this name already exists!');
 			} else {
 				const project = new Project(projectName);
 				DOM.createNewProject(project.name, project.getCost(mode), project.getLinesOfCode(mode), project.remainsLinesOfCode);
@@ -180,7 +180,7 @@ export const main = function () {
 				}
 			}
 		} else {
-			alert('You need to choose mode and start the game first!');
+			error('You need to choose mode and start the game first!');
 		}
 	});
 
@@ -190,7 +190,7 @@ export const main = function () {
 			const managerName = DOM.managerNameInput.value;
 			const managerSurname = DOM.managerSurnameInput.value;
 			if (isManagerExists(managerName, managerSurname, managers)) {
-				alert("Manager with this name and surname already exists!");
+				error("Manager with this name and surname already exists!");
 			} else {
 				const managerExperience = DOM.managerExperienceInput.value;
 				const fireButton = document.createElement('div');
@@ -203,7 +203,7 @@ export const main = function () {
 					managers.push(manager);
 					freeManagers.push(manager);
 				} else
-				  // Если есть свободный проект
+				// Если есть свободный проект
 				{
 					manager.state = freeProjects[0].name;
 					managers.push(manager);
@@ -274,7 +274,7 @@ export const main = function () {
 				});
 			}
 		} else {
-			alert('You need to choose mode and start the game first!');
+			error('You need to choose mode and start the game first!');
 		}
 	});
 
@@ -282,12 +282,12 @@ export const main = function () {
 	DOM.addDeveloperButton.addEventListener('click', () => {
 		if (isOn) {
 			if (developers.length >= managers.length * 5) {
-				alert("You don't have enough managers!");
+				error("You don't have enough managers!");
 			} else {
 				const developerName = DOM.developerNameInput.value;
 				const developerSurname = DOM.developerSurnameInput.value;
 				if (isDeveloperExists(developerName, developerSurname, developers)) {
-					alert("Developer with this name and surname already exists!");
+					error("Developer with this name and surname already exists!");
 				} else {
 					const developerExperience = DOM.developerExperienceInput.value;
 					const developer = new Developer(developerName, developerSurname, developerExperience);
@@ -341,7 +341,7 @@ export const main = function () {
 				}
 			}
 		} else {
-			alert('You need to choose mode and start the game first!');
+			error('You need to choose mode and start the game first!');
 		}
 	});
 
@@ -370,5 +370,12 @@ export const main = function () {
 			totalSalary = totalSalary + managers[i].getSalary();
 		}
 		return totalSalary;
+	}
+
+	function error(text) {
+		DOM.error.innerHTML = 'Error: ' + text;
+		setTimeout(() => {
+			DOM.error.innerHTML = '';
+		}, 2000);
 	}
 }();

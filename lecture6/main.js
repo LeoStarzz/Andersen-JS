@@ -21,7 +21,7 @@ var main = (function () {
 
 	dom.startButton.addEventListener('click', function () {
 		if (!isModeSelected) {
-			alert("Choose mode!");
+			error('Choose mode!');
 		} else {
 			isOn = true;
 			var companyName = dom.companyNameInput.value;
@@ -123,7 +123,7 @@ var main = (function () {
 		if (isOn) {
 			var projectName = dom.projectNameInput.value;
 			if (utils.isProjectExists(projectName, projects, freeProjects)) {
-				alert('Project with this name already exists!');
+				error('Project with this name already exists!');
 			} else {
 				var project = new Project(projectName);
 
@@ -170,7 +170,7 @@ var main = (function () {
 				}
 			}
 		} else {
-			alert("You need to choose mode and start the game first!");
+			error("You need to choose mode and start the game first!");
 		}
 	});
 
@@ -180,7 +180,7 @@ var main = (function () {
 			var managerName = dom.managerNameInput.value;
 			var managerSurname = dom.managerSurnameInput.value;
 			if (utils.isManagerExists(managerName, managerSurname, managers)) {
-				alert("Manager with this name and surname already exists!");
+				error("Manager with this name and surname already exists!");
 			} else {
 				var managerExperience = dom.managerExperienceInput.value;
 				var fireButton = document.createElement('div');
@@ -264,7 +264,7 @@ var main = (function () {
 				});
 			}
 		} else {
-			alert("You need to choose mode and start the game first!");
+			error("You need to choose mode and start the game first!");
 		}
 	});
 
@@ -272,13 +272,13 @@ var main = (function () {
 	dom.addDeveloperButton.addEventListener('click', function () {
 		if (isOn) {
 			if (developers.length >= managers.length * 5) {
-				alert("You don't have enough managers!");
+				error("You don't have enough managers!");
 			}
 			else {
 				var developerName = dom.developerNameInput.value;
 				var developerSurname = dom.developerSurnameInput.value;
 				if (utils.isDeveloperExists(developerName, developerSurname, developers)) {
-					alert("Developer with this name and surname already exists!");
+					error("Developer with this name and surname already exists!");
 				} else {
 					var developerExperience = dom.developerExperienceInput.value;
 					var developer = new Developer(developerName, developerSurname, developerExperience);
@@ -331,7 +331,7 @@ var main = (function () {
 				}
 			}
 		} else {
-			alert('You need to choose mode and start the game first!');
+			error('You need to choose mode and start the game first!');
 		}
 	});
 
@@ -360,6 +360,13 @@ var main = (function () {
 			totalSalary = totalSalary + managers[j].getSalary();
 		}
 		return totalSalary;
+	}
+
+	function error(text) {
+		dom.error.innerHTML = 'Error: ' + text;
+		setTimeout(function() {
+			dom.error.innerHTML = '';
+		}, 2000);
 	}
 
 	return main;
