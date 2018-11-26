@@ -61,7 +61,7 @@ export default class Dom {
 		div.appendChild(document.createTextNode('Surname:' + ' ' + surname + ', '));
 		div.appendChild(document.createTextNode('Experience:' + ' ' + experience + ', '));
 		div.appendChild(document.createTextNode('Lines:' + ' ' + lines + ', '));
-		var p = document.createElement('p');
+		const p = document.createElement('p');
 		p.className = "inline";
 		p.appendChild(document.createTextNode('Project:' + ' ' + state));
 		div.appendChild(p);
@@ -76,7 +76,7 @@ export default class Dom {
 		div.appendChild(document.createTextNode('Surname:' + ' ' + surname + ', '));
 		div.appendChild(document.createTextNode('Experience:' + ' ' + experience + ', '));
 		div.appendChild(document.createTextNode('Quotient:' + ' ' + quotient + ', '));
-		var p = document.createElement('p');
+		const p = document.createElement('p');
 		p.appendChild(document.createTextNode('Project:' + ' ' + state));
 		p.className = "inline";
 		div.appendChild(p);
@@ -85,12 +85,12 @@ export default class Dom {
 	}
 
 	createNewProject(name, cost, linesOfCode, remainsLinesOfCode) {
-		var div = document.createElement('div');
+		const div = document.createElement('div');
 		div.appendChild(document.createTextNode('Name:' + ' ' + name + ', '));
 		div.appendChild(document.createTextNode('Cost:' + ' ' + cost + ', '));
 		div.appendChild(document.createTextNode('Lines needed:' + ' ' + linesOfCode + ', '));
-		var p = document.createElement('p');
-		p.appendChild(document.createTextNode('Lines remain:' + ' ' + remainsLinesOfCode));
+		const p = document.createElement('p');
+		p.appendChild(document.createTextNode('Lines left:' + ' ' + remainsLinesOfCode));
 		div.appendChild(p);
 		this.userProjects.appendChild(div);
 	}

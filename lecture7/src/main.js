@@ -6,26 +6,25 @@ import Dom from './dom';
 import { isProjectExists, isManagerExists, isDeveloperExists } from './utils';
 
 export const main = function () {
+	let isOn = false;
+	let tick = 0;
+	let mode = undefined;
+	let budget = 0;
+	let time = 0;
+	let intervalID;
+	let totalSalary = 0;
+	let totalLines = 0;
+	let isModeSelected = false;
 
-	var isOn = false;
-	var tick = 0;
-	var mode = undefined;
-	var budget = 0;
-	var time = 0;
-	var intervalID;
-	var totalSalary = 0;
-	var totalLines = 0;
-	var isModeSelected = false;
-
-	var projects = [];
-	var managers = [];
-	var developers = [];
-	var busyDevelopers = [];
-	var busyManagers = [];
-	var freeDevelopers = [];
-	var freeManagers = [];
-	var freeProjects = [];
-	var DOM = new Dom();
+	let projects = [];
+	let managers = [];
+	let developers = [];
+	let busyDevelopers = [];
+	let busyManagers = [];
+	let freeDevelopers = [];
+	let freeManagers = [];
+	let freeProjects = [];
+	let DOM = new Dom();
 
 	DOM.startButton.addEventListener('click', () => {
 		if (!isModeSelected) {
@@ -79,8 +78,7 @@ export const main = function () {
 						} else {
 							project.remainsLinesOfCode = Math.round(project.remainsLinesOfCode - totalLines);
 						}
-						DOM.userProjects.children[projects.indexOf(project)].children[0].innerHTML = `Lines remain:
-																																 ${project.remainsLinesOfCode}`;
+						DOM.userProjects.children[projects.indexOf(project)].children[0].innerHTML = `Lines left: ${project.remainsLinesOfCode}`;
 						totalLines = 0;
 					}
 				}
@@ -138,13 +136,12 @@ export const main = function () {
 				const project = new Project(projectName);
 				DOM.createNewProject(project.name, project.getCost(mode), project.getLinesOfCode(mode), project.remainsLinesOfCode);
 				freeProjects.push(project);
-				var manager = null;
+				let manager = null;
 
 				if (freeManagers.length !== 0) {
 					// Берём первого свободного менеджера на проект
 					manager = freeManagers[0];
 					manager.state = freeProjects[0].name;
-					managers.push(manager);
 					busyManagers.push(manager);
 					freeProjects[0].manager = manager;
 					projects.push(freeProjects[0]);
@@ -157,11 +154,11 @@ export const main = function () {
 					}
 
 					// Обновляем DOM для разработчиков, взятых на проект
-					var count = 0;
+					let count = 0;
 					for (let developer of DOM.userDevelopers.children) {
 						if (count < 5) {
 							if (developer.children[0].innerHTML === 'Project: Free') {
-								developer.children[0].innerHTML = 'Project: ' + freeProjects[0].name;
+								developer.children[0].innerHTML = `Project: ${freeProjects[0].name}`;
 								count++;
 							}
 						}
@@ -172,7 +169,7 @@ export const main = function () {
 					// Обновляем DOM для менеждера, взятого на проект
 					for (let manager of DOM.userManagers.children) {
 						if (manager.children[0].innerHTML === 'Project: Free') {
-							manager.children[0].innerHTML = 'Project: ' + freeProjects[0].name;
+							manager.children[0].innerHTML = `Project: ${freeProjects[0].name}`;
 							break;
 						}
 					}
@@ -219,11 +216,11 @@ export const main = function () {
 					}
 
 					// Обновляем DOM для разработчиков, взятых на проект
-					var count = 0;
+					let count = 0;
 					for (let developer of DOM.userDevelopers.children) {
 						if (count < 5) {
 							if (developer.children[0].innerHTML === 'Project: Free') {
-								developer.children[0].innerHTML = 'Project: ' + freeProjects[0].name;
+								developer.children[0].innerHTML = `Project: ${freeProjects[0].name}`;
 								count++;
 							}
 						}
@@ -291,7 +288,7 @@ export const main = function () {
 				} else {
 					const developerExperience = DOM.developerExperienceInput.value;
 					const developer = new Developer(developerName, developerSurname, developerExperience);
-					var hired = false;
+					let hired = false;
 					const fireButton = document.createElement('div');
 					const div = document.createElement('div');
 
@@ -373,7 +370,7 @@ export const main = function () {
 	}
 
 	function error(text) {
-		DOM.error.innerHTML = 'Error: ' + text;
+		DOM.error.innerHTML = `Error: ${text}`;
 		setTimeout(() => {
 			DOM.error.innerHTML = '';
 		}, 2000);
