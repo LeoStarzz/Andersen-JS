@@ -42,45 +42,45 @@ export const main = function () {
 				time = time + 1;
 				totalLines = 0;
 
-				for (let i = 0; i < projects.length; i++) {
+				for (let project of projects) {
 					// Если проект завершен
-					if (projects[i].remainsLinesOfCode <= 0) {
-						budget = budget + projects[i].cost;
-						projects[i].manager.state = 'Free';
-						freeManagers.push(projects[i].manager);
-						DOM.userManagers.children[i].children[0].innerHTML = 'Project: ' + projects[i].manager.state;
+					if (project.remainsLinesOfCode <= 0) {
+						budget = budget + project.cost;
+						project.manager.state = 'Free';
+						freeManagers.push(project.manager);
+						DOM.userManagers.children[projects.indexOf(project)].children[0].innerHTML = 'Project: Free';
 						// Все разработчики, связанные с выполненным проектом помещаются в freeDevelopers
-						for (let k = 0; k < projects[i].manager.developers.length; k++) {
-							projects[i].manager.developers[k].state = 'Free';
-							freeDevelopers.push(projects[i].manager.developers[k]);
+						for (let developer of project.manager.developers) {
+							developer.state = 'Free';
+							freeDevelopers.push(developer);
 						}
 						// Обновление DOM для всех разработчиков, связанных с выполненным проектом
-						for (let p = 0; p < DOM.userDevelopers.childElementCount; p++) {
-							if (DOM.userDevelopers.children[p].children[0].innerHTML === 'Project: ' + projects[i].name) {
-								DOM.userDevelopers.children[p].children[0].innerHTML = 'Project: Free';
+						for (let developer of DOM.userDevelopers.children) {
+							if (developer.children[0].innerHTML === `Project: ${project.name}`) {
+								developer.children[0].innerHTML = 'Project: Free';
 							}
 						}
 						// Удаление проекта в projects и DOM
-						projects.splice(projects.indexOf(projects[i]), 1);
-						DOM.userProjects.removeChild(DOM.userProjects.children[i]);
+						DOM.userProjects.removeChild(DOM.userProjects.children[projects.indexOf(project)]);
+						projects.splice(projects.indexOf(project), 1);
 					} else {
 						// Если проект не завершён
-						if (projects[i].manager !== null) {
+						if (project.manager !== null) {
 							// Если есть менеждер считаем строки кода
-							for (let j = 0; j < projects[i].manager.developers.length; j++) {
-								totalLines = totalLines + projects[i].manager.developers[j].lines;
+							for (let developer of project.manager.developers) {
+								totalLines = totalLines + developer.lines;
 							}
 
-							totalLines = totalLines * projects[i].manager.getQuotient();
+							totalLines = totalLines * project.manager.getQuotient();
 						}
 						// Обновляем оставшееся количество строк у проекта
-						if (projects[i].remainsLinesOfCode - totalLines < 0) {
-							projects[i].remainsLinesOfCode = 0;
+						if (project.remainsLinesOfCode - totalLines < 0) {
+							project.remainsLinesOfCode = 0;
 						} else {
-							projects[i].remainsLinesOfCode = Math.round(projects[i].remainsLinesOfCode - totalLines);
+							project.remainsLinesOfCode = Math.round(project.remainsLinesOfCode - totalLines);
 						}
-						DOM.userProjects.children[i].children[0].innerHTML = `Lines remain:
-																																 ${projects[i].remainsLinesOfCode}`;
+						DOM.userProjects.children[projects.indexOf(project)].children[0].innerHTML = `Lines remain:
+																																 ${project.remainsLinesOfCode}`;
 						totalLines = 0;
 					}
 				}
@@ -150,18 +150,18 @@ export const main = function () {
 					projects.push(freeProjects[0]);
 
 					// Берём макс. 5 свободных разработчиков на проект
-					for (let i = 0; i < freeDevelopers.length; i++) {
+					for (let developer of freeDevelopers) {
 						if (manager.developers < 5) {
-							manager.developers.push(freeDevelopers[i]);
+							manager.developers.push(developer);
 						}
 					}
 
 					// Обновляем DOM для разработчиков, взятых на проект
 					var count = 0;
-					for (let j = 0; j < DOM.userDevelopers.childElementCount; j++) {
+					for (let developer of DOM.userDevelopers.children) {
 						if (count < 5) {
-							if (DOM.userDevelopers.children[j].children[0].innerHTML === 'Project: Free') {
-								DOM.userDevelopers.children[j].children[0].innerHTML = 'Project: ' + freeProjects[0].name;
+							if (developer.children[0].innerHTML === 'Project: Free') {
+								developer.children[0].innerHTML = 'Project: ' + freeProjects[0].name;
 								count++;
 							}
 						}
@@ -170,9 +170,9 @@ export const main = function () {
 					freeManagers.pop();
 
 					// Обновляем DOM для менеждера, взятого на проект
-					for (let i = 0; i < DOM.userManagers.childElementCount; i++) {
-						if (DOM.userManagers.children[i].children[0].innerHTML === 'Project: Free') {
-							DOM.userManagers.children[i].children[0].innerHTML = 'Project: ' + freeProjects[0].name;
+					for (let manager of DOM.userManagers.children) {
+						if (manager.children[0].innerHTML === 'Project: Free') {
+							manager.children[0].innerHTML = 'Project: ' + freeProjects[0].name;
 							break;
 						}
 					}
@@ -212,18 +212,18 @@ export const main = function () {
 					projects.push(freeProjects[0]);
 
 					// Берём макс. 5 свободных разработчиков на проект
-					for (let i = 0; i < freeDevelopers.length; i++) {
+					for (let developer of freeDevelopers) {
 						if (manager.developers < 5) {
-							manager.developers.push(freeDevelopers[i]);
+							manager.developers.push(developer);
 						}
 					}
 
 					// Обновляем DOM для разработчиков, взятых на проект
 					var count = 0;
-					for (let i = 0; i < DOM.userDevelopers.childElementCount; i++) {
+					for (let developer of DOM.userDevelopers.children) {
 						if (count < 5) {
-							if (DOM.userDevelopers.children[i].children[0].innerHTML === 'Project: Free') {
-								DOM.userDevelopers.children[i].children[0].innerHTML = 'Project: ' + freeProjects[0].name;
+							if (developer.children[0].innerHTML === 'Project: Free') {
+								developer.children[0].innerHTML = 'Project: ' + freeProjects[0].name;
 								count++;
 							}
 						}
@@ -248,21 +248,21 @@ export const main = function () {
 						busyManagers.splice(managers.indexOf(manager), 1);
 
 						// Освобождаем разработчиков, работающих на этом проекте
-						for (let i = 0; i < manager.developers.length; i++) {
-							manager.developers[i].state = 'Free';
-							freeDevelopers.push(manager.developers[i]);
+						for (let developer of manager.developers) {
+							developer.state = 'Free';
+							freeDevelopers.push(developer);
 						}
 
-						for (let j = 0; j < projects.length; j++) {
+						for (let project of projects) {
 							// Находим проект, связанный с этим менеджером
-							if (projects[j].manager !== null) {
-								if (projects[j].manager.name === manager.name && projects[j].manager.surname === manager.surname) {
-									freeProjects.push(projects[j]);
-									projects[j].manager = null;
+							if (project.manager !== null) {
+								if (project.manager.name === manager.name && project.manager.surname === manager.surname) {
+									freeProjects.push(project);
+									project.manager = null;
 									// Обновляем DOM для разработчиков, работающих на проекте
-									for (let i = 0; i < DOM.userDevelopers.childElementCount; i++) {
-										if (DOM.userDevelopers.children[i].children[0].innerHTML === 'Project: ' + projects[j].name) {
-											DOM.userDevelopers.children[i].children[0].innerHTML = 'Project: Free';
+									for (let developer of DOM.userDevelopers.children) {
+										if (developer.children[0].innerHTML === `Project: ${project.name}`) {
+											developer.children[0].innerHTML = 'Project: Free';
 										}
 									}
 									console.log(freeProjects);
@@ -296,12 +296,12 @@ export const main = function () {
 					const div = document.createElement('div');
 
 					// Если есть проект с менеджером и менее 5 разработчиков, то добавляем разработчика на проект
-					for (let i = 0; i < projects.length; i++) {
-						if (projects[i].manager !== null) {
-							if (projects[i].manager.developers.length < 5) {
+					for (let project of projects) {
+						if (project.manager !== null) {
+							if (project.manager.developers.length < 5) {
 								developers.push(developer);
-								projects[i].manager.developers.push(developer);
-								developer.state = projects[i].name;
+								project.manager.developers.push(developer);
+								developer.state = project.name;
 								busyDevelopers.push(developer);
 								hired = true;
 								break;
@@ -329,9 +329,9 @@ export const main = function () {
 						// Если занятый на проекте
 						{
 							// Ищем на каком проекте работает и удаляем
-							for (let i = 0; i < projects.length; i++) {
-								if (projects[i].manager.developers.indexOf(developer) !== -1) {
-									projects[i].manager.developers.splice(projects[i].manager.developers.indexOf(developer), 1);
+							for (let project of projects) {
+								if (project.manager.developers.indexOf(developer) !== -1) {
+									project.manager.developers.splice(project.manager.developers.indexOf(developer), 1);
 								}
 							}
 							developers.splice(developers.indexOf(developer), 1);
@@ -363,11 +363,11 @@ export const main = function () {
 
 	function getTotalSalary() {
 		totalSalary = 0;
-		for (let i = 0; i < developers.length; i++) {
-			totalSalary = totalSalary + developers[i].getSalary();
+		for (let developer of developers) {
+			totalSalary = totalSalary + developer.getSalary();
 		}
-		for (let i = 0; i < managers.length; i++) {
-			totalSalary = totalSalary + managers[i].getSalary();
+		for (let manager of managers) {
+			totalSalary = totalSalary + manager.getSalary();
 		}
 		return totalSalary;
 	}
