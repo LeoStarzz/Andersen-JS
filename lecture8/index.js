@@ -3,12 +3,11 @@ const stdin = process.openStdin();
 const stream = fs.createWriteStream('./tmp.txt');
 
 stdin.on('data', (data) => {
-  if (data.toString().trim() === 'exit') {
+  const text = data.toString().trim();
+  if (text === 'exit') {
     fs.unlink('./tmp.txt');
     process.exit();
   } else {
-    stream.write(data.toString().trim() + '\n');
+    stream.write(text + '\n');
   }
 });
-
-
